@@ -1,0 +1,3 @@
+keytool -genkey -keypass changeit -storepass changeit -keystore serverkeystore.jks -keyalg RSA -keysize 2048 -validity 365
+keytool -export -storepass changeit -file copy.cer -keystore serverkeystore.jks
+keytool -import -v -trustcacerts -file copy.cer -keypass changeit -storepass changeit -keystore clienttruststore.jks

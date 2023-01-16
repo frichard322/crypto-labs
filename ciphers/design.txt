@@ -1,0 +1,30 @@
+Name: Farago Richard
+SUNet: frim1910
+
+In 1-3 sentences per section, comment on your approach to each of the parts of the assignment. What was your high-level strategy? How did you translate that into code? Did you make use of any Pythonic practices? We want you to reflect on your coding style, and whether you're making full use of the utilities provides.
+
+
+# Caesar Cipher
+
+It seemed easy that's the reason I used functional programming approach to make it 1 line :D
+
+
+# Vigenere Cipher
+
+Preprocess: Multiplied the keyword until it became longer than the plaintext and cut the extra letters from the end.
+Used functional programming paradigm to solve this problem.
+
+# Scytale Cipher
+
+Used a list of strings each of which reflected a line in the scheme and then concatenated each character to the corresponding line.
+By joining these lines it gives the solution.
+Noticed that by using the encryption with a different parameter I could easily decrypt the ciphertext. All I had to do is work it out on paper and it seemed logical.
+
+# Railfence Cipher
+
+Used list of strings again... I tried an hour or so to figure out a pattern on paper and I came across a pattern that matched which character goes to which line.
+Pattern (ex. num_rails = 5): from 0 it goes down until num_rails - 1 (0 1 2 3 4) and then turns back and goes upwards until it reaches 1 (5 4 3 2 1)
+This pattern repeats itself until the end.
+I needed a couple of hours to figure out the decryption, because I knew it has to do something with the encryption the same way as scytale encryption.
+Again paper and pencil... Solved a couple of problems on paper then I noticed it if I encrypt the positions (0 - length(ciphertext)) I could use that as guidance which character goes where in the plaintext.
+This approach isn't the most optimal, but it works :D.

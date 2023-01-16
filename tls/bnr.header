@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Length: 41205
+Content-Type: text/html; charset=utf-8
+Set-Cookie: ASP.NET_SessionId=15qzst24mzgizq0e3ghajitb; path=/; HttpOnly; SameSite=Lax
+Date: Wed, 22 Dec 2021 13:34:12 GMT
+Strict-Transport-Security: max-age=16070400; includeSubDomains
+Set-Cookie: TS019ad12a=0187e48c1bb43b4b03f2131d411858dc6ceb88c48f4c50d5d0c61a97529bb8fdab96c990590893d70bba32707eaf6b988a1c5bb769bae6f0bcd39ff42f6ac3529afeea81e6; Path=/; Domain=.bnr.ro

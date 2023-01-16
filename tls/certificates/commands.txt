@@ -1,0 +1,30 @@
+Password to everything: changeit
+
+1. Create root private key and certificate:
+openssl ecparam -name prime256v1 -genkey -noout -out RootCA.key
+openssl req -new -x509 -days 68 -key RootCA.key -out RootCA.crt
+
+2. Create server private key and certificate signed by RootCA:
+openssl ecparam -name prime256v1 -genkey -noout -out ServerCA.key
+openssl req -new -key ServerCA.key -out ServerCA.csr -sha256
+openssl x509 -req -days 68 -in ServerCA.csr -CA RootCA.crt -CAkey RootCA.key -CAcreateserial -out ServerCA.crt
+
+3. Create client private key and certificate signed by RootCA:
+openssl ecparam -name prime256v1 -genkey -noout -out ClientCA.key
+openssl req -new -key ClientCA.key -out ClientCA.csr -sha256
+openssl x509 -req -days 68 -in ClientCA.csr -CA RootCA.crt -CAkey RootCA.key -CAcreateserial -out ClientCA.crt
+
+4. Create server private key and certificate signed by ServerCA:
+keytool -genkeypair -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 62 -alias server -storetype JKS -keystore serverkeystore.jks -storepass changeit
+keytool -certreq -alias server -file server.csr -keystore serverkeystore.jks
+openssl x509 -req -days 62 -in server.csr -CA ServerCA.crt -CAkey ServerCA.key -CAcreateserial -out server.crt
+
+5. Create client private key and certificate signed by ClientCA:
+keytool -genkeypair -keyalg EC -keysize 256 -sigalg SHA256withECDSA -validity 62 -alias client -storetype JKS -keystore clientkeystore.jks -storepass changeit
+keytool -certreq -alias client -file client.csr -keystore clientkeystore.jks
+openssl x509 -req -days 62 -in client.csr -CA ClientCA.crt -CAkey ClientCA.key -CAcreateserial -out client.crt
+
+6. Import jks from signed certificates:
+keytool -import -alias serverSigned -keystore serverkeystore.jks -file server.crt
+keytool -import -alias clientSigned -keystore clientkeystore.jks -file client.crt
+keytool -import -alias ClientCASigned -keystore ClientCAkeystore.jks -file ClientCA.crt
